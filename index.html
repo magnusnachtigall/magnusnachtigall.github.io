@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Magnus :: CV</title>
-<meta name="description" content="Magnus – Informatik im Master. Lebenslauf und Projekte.">
-<meta property="og:title" content="Magnus :: CV">
-<meta property="og:description" content="Informatik im Master. Software fürs Lernen, Daten, Haskell.">
+<title>Magnus Nachtigall :: CV</title>
+<meta name="description" content="Magnus Nachtigall – M.Sc. Informatik an der LMU München. Lebenslauf, Projekte und Kontakt.">
+<meta property="og:title" content="Magnus Nachtigall :: CV">
+<meta property="og:description" content="M.Sc. Informatik an der LMU München. Web-Anwendungen rund um Daten und KI.">
 <meta property="og:type" content="profile">
 <meta name="theme-color" content="#F3F4EF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1216" media="(prefers-color-scheme: dark)">
@@ -20,7 +20,8 @@
 html{color-scheme:light dark;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <style>
 /* Layout: left-aligned editorial column. Hero = name + a spinning CD (pure CSS 3D, no libraries, no external requests).
-   Sections sit in a two-column grid on desktop: a narrow label rail with Haskell-comment headings, content on the right; stacked on phones. */
+   Sections sit in a two-column grid on desktop: a sticky label rail with Haskell-comment headings, content on the right; stacked on phones.
+   Experience and education run along one timeline rail. */
 :root {
   --paper: #F3F4EF;
   --ink: #16191F;
@@ -40,7 +41,10 @@ html{color-scheme:light dark;padding:env(safe-area-inset-top,0px) 0 env(safe-are
   --step-1: 1.25rem;
   --step-2: 1.6rem;
   --step-3: clamp(1.6rem, 4.4vw, 2.5rem);
-  --step-hero: clamp(3.1rem, 11.5vw, 6.75rem);
+  --step-hero: clamp(3rem, 10.5vw, 6.5rem);
+
+  --when: 9.5rem;
+  --gutter: 2.5rem;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -54,6 +58,7 @@ html{color-scheme:light dark;padding:env(safe-area-inset-top,0px) 0 env(safe-are
   --accent: #48C3B6; --mark: rgba(242, 210, 60, .26); --ok: #5BC47F;
   color-scheme: dark;
 }
+:root[data-theme="light"] { color-scheme: light; }
 
 /* language switch: German is the default without script */
 :root:not([data-lang="en"]) .en { display: none !important; }
@@ -85,36 +90,48 @@ ul { margin: 0; padding: 0; }
 .nav { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1.25rem; font-size: .95rem; }
 .nav a { color: var(--muted); text-decoration: none; }
 .nav a:hover { color: var(--ink); }
+.switches { display: inline-flex; align-items: center; gap: .5rem; }
 .lang { display: inline-flex; border: 1px solid var(--rule); border-radius: 999px; padding: 2px; }
 .lang button { font: 500 .75rem/1 var(--f-mono); letter-spacing: .06em; color: var(--muted); background: none; border: 0; border-radius: 999px; padding: .4rem .65rem; cursor: pointer; }
 .lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.theme { display: inline-grid; place-items: center; width: 2.05rem; height: 2.05rem; border: 1px solid var(--rule); border-radius: 50%; background: none; color: var(--ink); cursor: pointer; padding: 0; }
+.theme:hover { border-color: var(--ink); }
+.theme svg { width: 1rem; height: 1rem; }
 
 /* hero */
-.hero { display: grid; gap: 2.5rem 3.5rem; align-items: center; padding-block: clamp(2.5rem, 8vw, 5.5rem) 2.5rem; overflow-x: clip; }
-.hero-text { display: grid; gap: 1.6rem; min-width: 0; }
+.hero { display: grid; gap: 2.5rem 3.5rem; align-items: center; padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2.5rem, 6vw, 4rem); overflow-x: clip; }
+.hero-text { display: grid; gap: 1.5rem; min-width: 0; }
 .kicker { font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); letter-spacing: .02em; }
 .name {
   font-family: var(--f-display);
   font-variation-settings: "opsz" 96;
   font-weight: 760;
   font-size: var(--step-hero);
-  line-height: .9;
-  letter-spacing: -.035em;
+  line-height: .88;
+  letter-spacing: -.04em;
 }
 .name span { display: block; }
+.name .last { font-weight: 300; letter-spacing: -.035em; }
 .sig { font-family: var(--f-mono); font-size: clamp(.82rem, 3.2vw, 1.05rem); color: var(--muted); overflow-wrap: anywhere; }
 .sig .fn { color: var(--ink); font-weight: 500; }
 .sig .op { color: var(--accent); }
 .lead { font-size: clamp(1.1rem, 2.2vw, 1.3rem); line-height: 1.55; max-width: 38rem; }
-.hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1.25rem; }
-.status { display: inline-flex; align-items: center; gap: .55rem; border: 1px solid var(--rule); border-radius: 999px; padding: .4rem .9rem .4rem .75rem; font-size: .92rem; }
+.status { display: inline-flex; align-items: center; gap: .55rem; justify-self: start; border: 1px solid var(--rule); border-radius: 1.3rem; padding: .4rem .9rem .4rem .75rem; font-size: .92rem; }
 .dot { width: .55rem; height: .55rem; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 var(--ok); animation: pulse 2.6s ease-out infinite; flex: none; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent); } 70%, 100% { box-shadow: 0 0 0 .45rem transparent; } }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.25rem; }
 .facts { list-style: none; display: flex; flex-wrap: wrap; gap: .25rem 1.1rem; font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); }
+
+.btn { display: inline-flex; align-items: center; gap: .5rem; font: 500 .8rem/1 var(--f-mono); color: var(--ink); background: transparent; border: 1px solid var(--ink); border-radius: 4px; padding: .7rem .9rem; cursor: pointer; text-decoration: none; }
+.btn:hover { background: var(--ink); color: var(--paper); }
+.btn.solid { background: var(--ink); color: var(--paper); }
+.btn.solid:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+.btn svg { width: .95rem; height: .95rem; flex: none; }
 
 /* disc: a CD in CSS 3D. The faces spin; the rainbow sheen stays put, like light reflecting off a real disc. */
 .disc { --d: clamp(220px, 30vw, 320px); --h: 1.6px; margin: 0; display: grid; justify-items: center; gap: 1rem; }
 .disc-stage { position: relative; width: var(--d); height: var(--d); perspective: 1100px; cursor: grab; touch-action: none; user-select: none; -webkit-user-select: none; }
+.disc-stage::before { content: ""; position: absolute; inset: 8% 4% -6%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 18%, transparent), transparent); filter: blur(18px); transform: translateY(14%) scaleY(.55); pointer-events: none; }
 .disc-stage.dragging { cursor: grabbing; }
 .disc-tilt, .disc-spin { position: absolute; inset: 0; transform-style: preserve-3d; }
 .disc-tilt { transform: rotateY(-18deg) rotateX(52deg); }
@@ -154,6 +171,7 @@ ul { margin: 0; padding: 0; }
           mask: radial-gradient(circle closest-side, transparent 36%, rgba(0,0,0,.9) 42%, rgba(0,0,0,.6) 85%, transparent 99%);
 }
 .disc figcaption { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem 1rem; font-family: var(--f-mono); font-size: .75rem; color: var(--muted); }
+.disc figcaption .btn { padding: .55rem .75rem; font-size: .75rem; }
 
 /* sections */
 .section { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: 1.25rem 3rem; padding-block: clamp(2.5rem, 6vw, 4rem); border-top: 1px solid var(--rule); }
@@ -162,22 +180,37 @@ ul { margin: 0; padding: 0; }
 .section-body { min-width: 0; display: grid; gap: 2.25rem; }
 
 /* timeline entries */
-.entry { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: .35rem 1.75rem; }
+.entry { display: grid; grid-template-columns: var(--when) minmax(0, 1fr); gap: .35rem var(--gutter); }
 .when { font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); padding-top: .3rem; font-variant-numeric: tabular-nums; }
 .entry h3 { font-family: var(--f-display); font-variation-settings: "opsz" 24; font-weight: 600; font-size: var(--step-1); line-height: 1.25; letter-spacing: -.005em; }
 .where { color: var(--muted); font-size: .97rem; margin-top: .15rem; }
+.where b { color: var(--ink); font-weight: 700; }
 .entry ul:not(.stack) { list-style: none; display: grid; gap: .45rem; margin-top: .8rem; max-width: 40rem; }
 .entry ul:not(.stack) li { position: relative; padding-left: 1.1rem; }
 .entry ul:not(.stack) li::before { content: ""; position: absolute; left: 0; top: .78em; width: .45rem; height: 1px; background: var(--muted); }
 .stack { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .9rem; list-style: none; }
 .stack li { font-family: var(--f-mono); font-size: .75rem; color: var(--ink); border: 1px solid var(--rule); border-radius: 4px; padding: .2rem .5rem; }
 
+/* one rail through each timeline: a line from dot to dot, the current role filled in */
+.timeline { gap: 0; }
+.timeline .entry { position: relative; padding-bottom: 2.4rem; }
+.timeline .entry:last-child { padding-bottom: 0; }
+.timeline .entry::before { content: ""; position: absolute; left: calc(var(--when) + var(--gutter) / 2); top: .95rem; bottom: -.5rem; width: 1px; background: var(--rule); }
+.timeline .entry:last-child::before { display: none; }
+.timeline .entry::after { content: ""; position: absolute; left: calc(var(--when) + var(--gutter) / 2 - 4.5px); top: .45rem; width: 10px; height: 10px; border-radius: 50%; border: 2px solid var(--accent); background: var(--paper); }
+.timeline .entry.now::after { background: var(--accent); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent); }
+
+/* grades */
+.grades { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.grade { display: inline-flex; align-items: baseline; gap: .45rem; border: 1px solid var(--rule); border-radius: 6px; padding: .3rem .65rem .35rem; background: var(--panel); }
+.grade b { font-family: var(--f-display); font-variation-settings: "opsz" 48; font-weight: 700; font-size: 1.15rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.grade span { font-size: .85rem; color: var(--muted); }
+
 /* projects */
 .project { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5rem 2.5rem; align-items: start; }
 .project + .project { padding-top: 2.25rem; border-top: 1px dashed var(--rule); }
 .project .tag { font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); }
 .project h3 { font-family: var(--f-display); font-variation-settings: "opsz" 72; font-weight: 700; font-size: var(--step-3); line-height: 1.05; letter-spacing: -.025em; margin-top: .35rem; }
-.project .thesis { font-style: italic; color: var(--muted); margin-top: .6rem; font-size: .97rem; }
 .project .text { min-width: 0; display: grid; gap: .9rem; }
 .project .text p { max-width: 36rem; }
 .code { min-width: 0; margin: 0; background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; }
@@ -191,22 +224,38 @@ ul { margin: 0; padding: 0; }
 .numbers b { font-family: var(--f-display); font-variation-settings: "opsz" 48; font-weight: 700; font-size: 1.9rem; line-height: 1; font-variant-numeric: tabular-nums; }
 .numbers span { font-size: .85rem; color: var(--muted); margin-top: .3rem; }
 
+/* badge sketch next to the badges project */
+.sketch-body { padding: 1.1rem .9rem 1.2rem; display: grid; gap: 1.1rem; }
+.medals { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
+.medal { display: grid; justify-items: center; gap: .4rem; text-align: center; font-size: .72rem; line-height: 1.3; color: var(--muted); }
+.medal i { display: grid; place-items: center; width: 3.1rem; height: 3.1rem; border-radius: 50%; border: 2px solid var(--accent); background: radial-gradient(circle, var(--paper) 0 58%, color-mix(in srgb, var(--accent) 14%, var(--paper)) 59%); color: var(--accent); }
+.medal i svg { width: 1.25rem; height: 1.25rem; }
+.medal.locked i { border-style: dashed; border-color: var(--rule); color: var(--muted); background: var(--paper); }
+.next { display: grid; gap: .45rem; font-size: .85rem; }
+.next-row { display: flex; justify-content: space-between; gap: 1rem; }
+.next-row span:last-child { font-family: var(--f-mono); font-size: .75rem; color: var(--muted); }
+.bar { height: .5rem; border-radius: 999px; background: var(--paper); border: 1px solid var(--rule); overflow: hidden; }
+.bar i { display: block; height: 100%; width: 70%; background: var(--accent); border-radius: inherit; }
+
 /* skills */
-.skills { display: grid; grid-template-columns: 9.5rem minmax(0, 1fr); gap: .9rem 1.75rem; margin: 0; }
-.skills dt { font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); padding-top: .2rem; }
+.skills { display: grid; grid-template-columns: var(--when) minmax(0, 1fr); gap: 1rem var(--gutter); margin: 0; }
+.skills dt { font-family: var(--f-mono); font-size: var(--step--1); color: var(--muted); padding-top: .25rem; }
 .skills dd { margin: 0; min-width: 0; }
+.skills .stack { margin-top: 0; }
+.skills .stack li { font-size: .8rem; padding: .25rem .55rem; }
 
 /* contact */
+.contact { display: grid; gap: 1.25rem; }
 .mail-row { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem 1rem; }
-.mail { font-family: var(--f-display); font-variation-settings: "opsz" 72; font-weight: 650; font-size: clamp(1.25rem, 4.6vw, 2.4rem); letter-spacing: -.02em; line-height: 1.15; overflow-wrap: anywhere; user-select: all; }
-.btn { font: 500 .8rem/1 var(--f-mono); color: var(--ink); background: transparent; border: 1px solid var(--ink); border-radius: 4px; padding: .6rem .8rem; cursor: pointer; }
-.btn:hover { background: var(--ink); color: var(--paper); }
+.mail { font-family: var(--f-display); font-variation-settings: "opsz" 72; font-weight: 650; font-size: clamp(1.2rem, 4.4vw, 2.3rem); letter-spacing: -.02em; line-height: 1.15; overflow-wrap: anywhere; color: var(--ink); text-decoration: none; }
+.mail:hover { color: var(--accent); }
 .contact-note { color: var(--muted); max-width: 36rem; }
 
 .foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem 1.5rem; padding-block: 1.5rem 2.5rem; border-top: 1px solid var(--rule); font-family: var(--f-mono); font-size: .75rem; color: var(--muted); }
 
 @media (min-width: 881px) {
   .hero { grid-template-columns: minmax(0, 1fr) auto; }
+  .section h2 { position: sticky; top: 1.5rem; align-self: start; }
 }
 @media (max-width: 880px) {
   .section { grid-template-columns: minmax(0, 1fr); }
@@ -217,47 +266,74 @@ ul { margin: 0; padding: 0; }
   .when { padding-top: 0; }
   .skills dd { margin-bottom: .4rem; }
   .nav a { display: none; }
+  .timeline .entry { padding-left: 1.6rem; }
+  .timeline .entry::before { left: 4.5px; top: .7rem; }
+  .timeline .entry::after { left: 0; top: .3rem; }
+  .medals { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .disc-spin { animation: none; }
   .dot { animation: none; }
+}
+@media print {
+  :root { --paper: #fff; --ink: #000; --muted: #444; --rule: #ccc; --panel: #f4f4f4; --accent: #1B6E67; }
+  .nav, .disc, .disc-flip, .theme, .actions .btn, .copy, .sketch { display: none !important; }
+  .hero { grid-template-columns: 1fr; padding-block: 1rem; }
+  .section { padding-block: 1.2rem; break-inside: avoid-page; }
+  .section h2 { position: static; }
+  .entry, .project { break-inside: avoid; }
+  a { color: inherit; text-decoration: none; }
 }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header class="top">
-    <a class="wordmark" href="#top" id="top">magnus <b>:: CV</b></a>
+    <a class="wordmark" href="#top" id="top">magnus nachtigall <b>:: CV</b></a>
     <nav class="nav" aria-label="Seitennavigation">
       <a href="#erfahrung"><span class="de">Erfahrung</span><span class="en">Experience</span></a>
       <a href="#projekte"><span class="de">Projekte</span><span class="en">Projects</span></a>
       <a href="#ausbildung"><span class="de">Ausbildung</span><span class="en">Education</span></a>
-      <div class="lang" role="group" aria-label="Sprache / Language">
-        <button type="button" id="lang-de" data-set="de" aria-pressed="true">DE</button>
-        <button type="button" id="lang-en" data-set="en" aria-pressed="false">EN</button>
-      </div>
+      <a href="#kontakt"><span class="de">Kontakt</span><span class="en">Contact</span></a>
+      <span class="switches">
+        <span class="lang" role="group" aria-label="Sprache / Language">
+          <button type="button" id="lang-de" data-set="de" aria-pressed="true">DE</button>
+          <button type="button" id="lang-en" data-set="en" aria-pressed="false">EN</button>
+        </span>
+        <button class="theme" type="button" id="theme" aria-label="Hell/Dunkel wechseln" title="Hell/Dunkel">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor"/></svg>
+        </button>
+      </span>
     </nav>
   </header>
 
   <main>
     <section class="hero" aria-labelledby="name">
       <div class="hero-text">
-      <p class="kicker"><span class="de">M.Sc. Informatik</span><span class="en">M.Sc. Computer Science</span></p>
-      <h1 class="name" id="name">Magnus</h1>
-      <p class="sig" aria-hidden="true">
-        <span class="de"><span class="fn">magnus</span> <span class="op">::</span> Informatik <span class="op">-&gt;</span> Lernen <span class="op">-&gt;</span> Daten</span><span class="en"><span class="fn">magnus</span> <span class="op">::</span> ComputerScience <span class="op">-&gt;</span> Learning <span class="op">-&gt;</span> Data</span>
-      </p>
-      <p class="lead">
-        <span class="de">Ich studiere Informatik im Master und baue Software, die Menschen beim Lernen hilft: zuletzt eine KI-gestützte Übungsplattform für Haskell und ein Badge-System für eine Learning-Analytics-App. Als Nächstes will ich tiefer in Data Science einsteigen, am liebsten in einem Team, mit dem die Arbeit Spaß macht.</span>
-        <span class="en">I'm a master's student in computer science, and I build software that helps people learn: most recently an AI-powered Haskell exercise platform and a badge system for a learning analytics app. Next, I want to go deeper into data science, ideally in a team that makes the work fun.</span>
-      </p>
-      <div class="hero-meta">
-        <p class="status"><span class="dot" aria-hidden="true"></span><span class="de">Offen für Werkstudentenstellen in Data Science ab Januar 2027</span><span class="en">Open to working-student roles in data science from January 2027</span></p>
-        <ul class="facts">
-          <li><span class="de">Deutsch · Englisch C1/C2</span><span class="en">German · English C1/C2</span></li>
-          <li>Python · TypeScript · SQL · Haskell</li>
-        </ul>
-      </div>
+        <p class="kicker"><span class="de">M.Sc. Informatik, LMU München</span><span class="en">M.Sc. Computer Science, LMU Munich</span></p>
+        <h1 class="name" id="name"><span>Magnus</span><span class="last">Nachtigall</span></h1>
+        <p class="sig" aria-hidden="true">
+          <span class="de"><span class="fn">magnus</span> <span class="op">::</span> Informatik <span class="op">-&gt;</span> Daten <span class="op">-&gt;</span> Software</span><span class="en"><span class="fn">magnus</span> <span class="op">::</span> ComputerScience <span class="op">-&gt;</span> Data <span class="op">-&gt;</span> Software</span>
+        </p>
+        <p class="lead">
+          <span class="de">Ich studiere Informatik im Master an der LMU München und baue Web-Anwendungen rund um Daten und KI: zuletzt eine KI-gestützte Übungsplattform für Haskell und ein Badge-System für die Learning-Analytics-App PaOLA. Als Nächstes suche ich eine Werkstudentenstelle in Softwareentwicklung oder Data Science, am liebsten in einem Team, mit dem die Arbeit Spaß macht.</span>
+          <span class="en">I'm a master's student in computer science at LMU Munich and I build web apps around data and AI: most recently an AI-powered Haskell exercise platform and a badge system for the learning analytics app PaOLA. Next, I'm looking for a working-student role in software development or data science, ideally in a team that makes the work fun.</span>
+        </p>
+        <p class="status"><span class="dot" aria-hidden="true"></span><span class="de">Ab sofort verfügbar als Werkstudent, 15–20 Std./Woche</span><span class="en">Available now as a working student, 15–20 h/week</span></p>
+        <div class="actions">
+          <a class="btn solid" href="mailto:magnus.b.nachtigall@gmail.com">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <span class="de">E-Mail schreiben</span><span class="en">Send an email</span>
+          </a>
+          <a class="btn" href="https://github.com/magnusnachtigall">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.75c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+            GitHub
+          </a>
+          <ul class="facts">
+            <li><span class="de">München</span><span class="en">Munich</span></li>
+            <li><span class="de">Deutsch, Englisch C1</span><span class="en">German, English C1</span></li>
+          </ul>
+        </div>
       </div>
 
       <figure class="disc" id="disc">
@@ -275,50 +351,64 @@ ul { margin: 0; padding: 0; }
         </div>
         <figcaption>
           <span class="de">-- ziehen zum Kippen</span><span class="en">-- drag to tilt</span>
-          <button class="btn" type="button" id="disc-flip"><span class="de">Umdrehen</span><span class="en">Flip it</span></button>
+          <button class="btn disc-flip" type="button" id="disc-flip"><span class="de">Umdrehen</span><span class="en">Flip it</span></button>
         </figcaption>
       </figure>
     </section>
 
     <section class="section" id="erfahrung" aria-labelledby="h-exp">
       <h2 id="h-exp"><span class="cm" aria-hidden="true">-- [2020 ..]</span><span class="de">Erfahrung</span><span class="en">Experience</span></h2>
-      <div class="section-body">
-        <article class="entry">
-          <p class="when"><span class="de">Aug. 2026 – heute</span><span class="en">Aug 2026 – now</span></p>
+      <div class="section-body timeline">
+        <article class="entry now">
+          <p class="when"><span class="de">seit&nbsp;Aug.&nbsp;2026</span><span class="en">since&nbsp;Aug&nbsp;2026</span></p>
           <div>
-            <h3><span class="de">Studentische Hilfskraft, Learning-Analytics-Projekt</span><span class="en">Student Research Assistant, learning analytics project</span></h3>
-            <p class="where"><span class="de">Uni-Forschungsgruppe zu Technology-Enhanced Learning</span><span class="en">University research group in technology-enhanced learning</span></p>
+            <h3><span class="de">Studentische Hilfskraft</span><span class="en">Student Research Assistant</span></h3>
+            <p class="where"><b>LMU München</b>, <span class="de">Technology-Enhanced Learning</span><span class="en">Technology-Enhanced Learning group</span></p>
             <ul>
-              <li><span class="de">Eine Web-App, in der Studierende in MINT-Grundlagenkursen ihr analoges Lernen dokumentieren und Lehrende aggregierte Einblicke bekommen.</span><span class="en">A web app where students in foundational STEM courses log their offline learning and instructors get aggregated insights.</span></li>
-              <li><span class="de">Zuständig für das Feature Gamification: Literaturrecherche zum Forschungsstand, Bewertung von 33 Badge-Ideen und prototypische Umsetzung des Badge-Systems.</span><span class="en">Own the gamification feature: literature review of the research, an assessment of 33 badge ideas, and a prototype of the badge system.</span></li>
+              <li><span class="de">Weiterentwicklung der Web-App PaOLA, in der Studierende in MINT-Grundlagenkursen ihr Lernen erfassen und Lehrende aggregierte Auswertungen sehen.</span><span class="en">Developing the web app PaOLA, where students in foundational STEM courses log their learning and instructors see aggregated insights.</span></li>
+              <li><span class="de">Zuständig für das Badge-System: 33 Badge-Ideen bewertet, Datenmodell entworfen und die Vergabe direkt aus den Lerndaten in MariaDB umgesetzt.</span><span class="en">Own the badge system: assessed 33 badge ideas, designed the data model and built badge awarding straight from the learning data in MariaDB.</span></li>
             </ul>
             <ul class="stack" aria-label="Stack">
-              <li>Next.js 15</li><li>TypeScript</li><li>MariaDB</li><li>Docker</li><li>GitLab</li><li>LaTeX</li>
+              <li>Next.js 15</li><li>TypeScript</li><li>MariaDB</li><li>Docker</li><li>GitLab</li>
             </ul>
           </div>
         </article>
 
         <article class="entry">
-          <p class="when"><span class="de">Mai – Okt. 2025</span><span class="en">May – Oct 2025</span></p>
+          <p class="when"><span class="de">Mai – Okt.&nbsp;2025</span><span class="en">May – Oct&nbsp;2025</span></p>
           <div>
             <h3><span class="de">Werkstudent Business Development</span><span class="en">Working Student, Business Development</span></h3>
-            <p class="where"><span class="de">Wetterdaten-Plattform</span><span class="en">Weather data platform</span></p>
+            <p class="where"><b>wetter.com GmbH</b>, <span class="de">München</span><span class="en">Munich</span></p>
             <ul>
-              <li><span class="de">Koordination der API-Migration von v3.0 auf v4.0: Analyse der Bestandskunden und technische Kommunikation auf Deutsch und Englisch.</span><span class="en">Coordinated the API migration from v3.0 to v4.0: analysed existing customers and handled technical communication in German and English.</span></li>
-              <li><span class="de">Pflege von Kunden-Microsites und Content-Teasern im CMS, inklusive Tracking und Reporting.</span><span class="en">Maintained customer microsites and content teasers in the CMS, including tracking and reporting.</span></li>
-              <li><span class="de">CRM-Pflege in HubSpot, technische Spezifikationen für Wetter-API und Kampagnen-Tool, Abstimmung mit Produkt- und Entwicklungsteams.</span><span class="en">Kept HubSpot CRM up to date, wrote technical specs for the weather API and a campaign tool, and worked with product and engineering teams.</span></li>
+              <li><span class="de">Spezifikationen und API-Datenflüsse der Wetter-API 4.0 mit Produkt und Entwicklung geklärt.</span><span class="en">Worked out specs and API data flows for the weather API 4.0 with product and engineering.</span></li>
+              <li><span class="de">Bestandskundenübersicht für die Umstellung von v3.0 auf v4.0 aufgebaut und die technische Kundenkommunikation auf Deutsch und Englisch abgestimmt.</span><span class="en">Built the overview of existing customers for the v3.0 to v4.0 migration and handled technical customer communication in German and English.</span></li>
+              <li><span class="de">CRM-Pflege in HubSpot sowie Kunden-Microsites und Content-Teaser im CMS, inklusive Tracking und Reporting.</span><span class="en">Kept HubSpot CRM up to date and maintained customer microsites and content teasers in the CMS, including tracking and reporting.</span></li>
+            </ul>
+            <ul class="stack" aria-label="Stack">
+              <li>REST-API</li><li>HubSpot</li><li>Excel</li><li>CMS</li>
             </ul>
           </div>
         </article>
 
         <article class="entry">
-          <p class="when"><span class="de">Apr. – Okt. 2024</span><span class="en">Apr – Oct 2024</span></p>
+          <p class="when"><span class="de">Apr. – Sep.&nbsp;2024</span><span class="en">Apr – Sep&nbsp;2024</span></p>
           <div>
-            <h3><span class="de">Tutor, Funktionale Programmierung</span><span class="en">Tutor, functional programming</span></h3>
-            <p class="where"><span class="de">Informatik, Universität</span><span class="en">Computer science, university</span></p>
+            <h3><span class="de">Tutor Programmierung und Modellierung</span><span class="en">Tutor, Programming and Modelling</span></h3>
+            <p class="where"><b>LMU München</b>, <span class="de">Institut für Informatik</span><span class="en">Institute for Informatics</span></p>
             <ul>
-              <li><span class="de">Eigene Übungsgruppen im Erstsemestermodul zur funktionalen Programmierung in Haskell.</span><span class="en">Ran my own tutorial groups in the first-year functional programming course in Haskell.</span></li>
-              <li><span class="de">Individuelle Betreuung bei fachlichen Fragen. Für genau dieses Modul habe ich später in der Bachelorarbeit den Haskell Micro-Trainer gebaut.</span><span class="en">One-to-one help with course questions. Later built the Haskell Micro-Trainer for this very course in my bachelor's thesis.</span></li>
+              <li><span class="de">Eigene Übungsgruppen im Erstsemestermodul zur funktionalen Programmierung in Haskell geleitet.</span><span class="en">Ran my own tutorial groups in the first-year functional programming course in Haskell.</span></li>
+              <li><span class="de">Studierende bei fachlichen Fragen betreut. Für genau dieses Modul habe ich später in der Bachelorarbeit den Haskell Micro-Trainer gebaut.</span><span class="en">Helped students with course questions. Later built the Haskell Micro-Trainer for this very course in my bachelor's thesis.</span></li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="entry">
+          <p class="when"><span class="de">Sep.&nbsp;2023</span><span class="en">Sep&nbsp;2023</span></p>
+          <div>
+            <h3><span class="de">Mikropraktikum, Q4 Internship Flash</span><span class="en">Micro-internship, Q4 Internship Flash</span></h3>
+            <p class="where"><b>LMU Career Service</b>, <span class="de">München</span><span class="en">Munich</span></p>
+            <ul>
+              <li><span class="de">Business Case für Capgemini und Avanade in einem interdisziplinären Studierendenteam gelöst.</span><span class="en">Solved a business case for Capgemini and Avanade in an interdisciplinary student team.</span></li>
             </ul>
           </div>
         </article>
@@ -326,10 +416,10 @@ ul { margin: 0; padding: 0; }
         <article class="entry">
           <p class="when"><span class="de">2020 – 2025, saisonal</span><span class="en">2020 – 2025, seasonal</span></p>
           <div>
-            <h3><span class="de">Direktvertrieb für gemeinnützige Organisationen</span><span class="en">Door-to-door fundraising for non-profits</span></h3>
-            <p class="where"><span class="de">Fundraising-Agentur</span><span class="en">Fundraising agency</span></p>
+            <h3><span class="de">Fundraiser im Außendienst</span><span class="en">Face-to-Face Fundraiser (Field Sales)</span></h3>
+            <p class="where"><b>Kober GmbH</b>, <span class="de">neben Schule und Studium</span><span class="en">alongside school and university</span></p>
             <ul>
-              <li><span class="de">Gewinnung von Fördermitgliedern im Außendienst für gemeinnützige Organisationen.</span><span class="en">Recruited supporting members in the field for non-profit organisations.</span></li>
+              <li><span class="de">Spendenwerbung für gemeinnützige Organisationen: insgesamt ca. 300.000 € an Spenden gewonnen.</span><span class="en">Acquired regular donors for non-profits in door-to-door campaigns, raising approx. €300,000 in total.</span></li>
               <li><span class="de">Einarbeitung neuer Kolleginnen und Kollegen im Team.</span><span class="en">Onboarded new team members.</span></li>
             </ul>
           </div>
@@ -342,20 +432,21 @@ ul { margin: 0; padding: 0; }
       <div class="section-body">
         <article class="project">
           <div class="text">
-            <p class="tag"><span class="de">Bachelorarbeit · Note <mark>1,3</mark></span><span class="en">Bachelor's thesis · grade <mark>1.3</mark> (German scale)</span></p>
+            <p class="tag"><span class="de">Bachelorarbeit, Note <mark>1,3</mark></span><span class="en">Bachelor's thesis, grade <mark>1.3</mark> (German scale)</span></p>
             <h3>Haskell Micro-Trainer</h3>
-            <p><span class="de">Sprachmodelle erzeugen gern Aufgaben mit Sprachfeatures, die im ersten Semester noch gar nicht dran waren. Der Micro-Trainer bindet das Modell deshalb an den Kurs: Pools aus Beispiel-Funktionsnamen steuern Thema, Umfang und Schwierigkeit jeder Aufgabe, und Abgaben bekommen automatisches Feedback.</span><span class="en">Language models like to generate exercises with language features first-year students haven't seen yet. The Micro-Trainer ties the model to the course instead: pools of example function names steer the topic, scope and difficulty of each exercise, and submissions get automatic feedback.</span></p>
+            <p><span class="de">Sprachmodelle erzeugen gern Aufgaben mit Sprachfeatures, die im ersten Semester noch gar nicht dran waren. Der Micro-Trainer bindet das Modell deshalb an den Kurs: Pools aus Beispiel-Funktionsnamen steuern Thema, Umfang und Schwierigkeit jeder Aufgabe, und Abgaben werden automatisch getestet und bekommen Feedback.</span><span class="en">Language models like to generate exercises with language features first-year students haven't seen yet. The Micro-Trainer ties the model to the course instead: pools of example function names steer the topic, scope and difficulty of each exercise, and submissions are tested automatically and get feedback.</span></p>
             <p><span class="de">Evaluiert aus drei Richtungen: manuelle Bewertung der generierten Aufgaben, Umfrage und Nutzungsdaten. Das wichtigste Ergebnis: Studierenden ist der Zugang zu Übungen wichtiger als perfekte Aufgaben.</span><span class="en">Evaluated three ways: manual review of the generated exercises, a survey, and usage tracking. The main finding: students value access to practice more than perfect exercises.</span></p>
             <div class="numbers">
               <div><b>19</b><span class="de">Teilnehmende</span><span class="en">participants</span></div>
               <div><b>3</b><span class="de">Evaluationsphasen</span><span class="en">evaluation phases</span></div>
+              <div><b>1,3</b><span class="de">Note</span><span class="en">grade</span></div>
             </div>
             <ul class="stack" aria-label="Stack">
               <li>TypeScript</li><li>React</li><li>Supabase</li><li>PostgreSQL</li><li>OpenAI API</li><li>Prompt Engineering</li>
             </ul>
           </div>
           <figure class="code">
-            <figcaption class="code-bar"><span class="de">Beispielaufgabe · Rekursion</span><span class="en">Sample exercise · recursion</span><span>Exercise.hs</span></figcaption>
+            <figcaption class="code-bar"><span class="de">Beispielaufgabe: Rekursion</span><span class="en">Sample exercise: recursion</span><span>Exercise.hs</span></figcaption>
 <pre><code><span class="de"><span class="c">-- Verdopple das erste negative Element.
 -- Alle anderen bleiben unverändert.</span>
 </span><span class="en"><span class="c">-- Double the first negative element.
@@ -373,45 +464,68 @@ ul { margin: 0; padding: 0; }
 
         <article class="project">
           <div class="text">
-            <p class="tag"><span class="de">Learning Analytics · Gamification</span><span class="en">Learning analytics · gamification</span></p>
+            <p class="tag"><span class="de">PaOLA, Gamification</span><span class="en">PaOLA, gamification</span></p>
             <h3><span class="de">Badges für Learning Analytics</span><span class="en">Badges for learning analytics</span></h3>
             <p><span class="de">Kurzes englisches Paper zum Forschungsstand (unter anderem Sailer &amp; Homner 2020): Stand der Gamification-Forschung, nutzbare Daten, Lernunterstützung und Motivation zur Teilnahme an Umfragen. Dazu eine Bewertung von 33 Badge-Ideen nach bauen, überarbeiten oder streichen.</span><span class="en">A short English paper on the research (including Sailer &amp; Homner 2020): the state of gamification research, usable data, learning support, and motivating survey participation. Plus an assessment of 33 badge ideas: build, rework or drop.</span></p>
-            <p><span class="de">Prototyp im bestehenden Next.js-Projekt: Badges, die bei Meilensteinen automatisch vergeben werden, eine Übersichtsseite und eine Anzeige für das nächste erreichbare Badge, berechnet direkt aus den Lernaufzeichnungen in MariaDB.</span><span class="en">Prototyped in the existing Next.js app: badges awarded automatically at milestones, an overview page, and an "up next" hint for the closest badge, computed straight from the learning logs in MariaDB.</span></p>
+            <p><span class="de">Umsetzung im bestehenden Next.js-Projekt: Badges, die bei Meilensteinen automatisch vergeben werden, eine Übersichtsseite und eine Anzeige für das nächste erreichbare Badge, berechnet direkt aus den Lernaufzeichnungen in MariaDB.</span><span class="en">Built into the existing Next.js app: badges awarded automatically at milestones, an overview page, and an "up next" hint for the closest badge, computed straight from the learning logs in MariaDB.</span></p>
             <ul class="stack" aria-label="Stack">
-              <li>Next.js</li><li>SQL</li><li>MariaDB</li><li>LaTeX</li>
+              <li>Next.js</li><li>TypeScript</li><li>SQL</li><li>MariaDB</li>
             </ul>
           </div>
+          <figure class="code sketch">
+            <figcaption class="code-bar"><span class="de">Skizze: Badge-Übersicht</span><span class="en">Sketch: badge overview</span><span>badges.tsx</span></figcaption>
+            <div class="sketch-body">
+              <ul class="medals">
+                <li class="medal"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5 10 17l9-10" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i><span class="de">Erster Eintrag</span><span class="en">First entry</span></li>
+                <li class="medal"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c1 3.5 5 5.5 5 10a5 5 0 0 1-10 0c0-2 1-3.4 2-4.5.3 1.6 1.2 2.5 2 2.5-.5-3 0-5.5 1-8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></i><span class="de">Serie</span><span class="en">Streak</span></li>
+                <li class="medal"><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4z" fill="none" stroke="currentColor" stroke-width="2"/></svg></i><span class="de">Vielfalt</span><span class="en">Variety</span></li>
+                <li class="medal locked"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="11" width="12" height="9" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8.5 11V8a3.5 3.5 0 0 1 7 0v3" fill="none" stroke="currentColor" stroke-width="2"/></svg></i><span class="de">Dranbleiben</span><span class="en">Keep going</span></li>
+              </ul>
+              <div class="next">
+                <div class="next-row"><span class="de">Nächstes Badge: Dranbleiben</span><span class="en">Up next: Keep going</span><span>7 / 10</span></div>
+                <div class="bar" aria-hidden="true"><i></i></div>
+              </div>
+            </div>
+          </figure>
         </article>
       </div>
     </section>
 
     <section class="section" id="ausbildung" aria-labelledby="h-edu">
       <h2 id="h-edu"><span class="cm" aria-hidden="true">-- foldr learn</span><span class="de">Ausbildung</span><span class="en">Education</span></h2>
-      <div class="section-body">
-        <article class="entry">
-          <p class="when"><span class="de">seit WiSe 2026/27</span><span class="en">since Oct 2026</span></p>
+      <div class="section-body timeline">
+        <article class="entry now">
+          <p class="when"><span class="de">seit&nbsp;Okt.&nbsp;2026</span><span class="en">since&nbsp;Oct&nbsp;2026</span></p>
           <div>
             <h3><span class="de">M.Sc. Informatik</span><span class="en">M.Sc. Computer Science</span></h3>
+            <p class="where"><b>Ludwig-Maximilians-Universität München</b></p>
+            <div class="grades">
+              <p class="grade"><b>1,3</b><span class="de">aktueller Schnitt</span><span class="en">current average</span></p>
+            </div>
             <ul>
-              <li><span class="de">Aktuell: Data Mining, Verifikation paralleler Programme, Virtual Reality und Typtheorie.</span><span class="en">Currently: data mining, verification of parallel programs, virtual reality and type theory.</span></li>
+              <li><span class="de">Voraussichtlicher Abschluss 2028. Dieses Semester unter anderem im Seminar Ethics in AI.</span><span class="en">Expected to graduate in 2028. This term includes the seminar Ethics in AI.</span></li>
             </ul>
           </div>
         </article>
         <article class="entry">
-          <p class="when">2022 – 2026</p>
+          <p class="when"><span class="de">Apr.&nbsp;2022 – Mai&nbsp;2026</span><span class="en">Apr&nbsp;2022 – May&nbsp;2026</span></p>
           <div>
             <h3><span class="de">B.Sc. Informatik mit Nebenfach BWL</span><span class="en">B.Sc. Computer Science, minor in Business</span></h3>
+            <p class="where"><b>Ludwig-Maximilians-Universität München</b></p>
+            <div class="grades">
+              <p class="grade"><b>1,7</b><span class="de">Informatik-Schnitt</span><span class="en">CS average</span></p>
+              <p class="grade"><b>1,3</b><span class="de">Bachelorarbeit</span><span class="en">thesis</span></p>
+            </div>
             <ul>
-              <li><span class="de">Schwerpunkte: Algorithmen, Datenbanken, Data Mining. BWL-Nebenfach mit 30 ECTS.</span><span class="en">Focus: algorithms, databases, data mining. Business minor, 30 ECTS.</span></li>
-              <li><span class="de">Bachelorarbeit zum Haskell Micro-Trainer, Note 1,3.</span><span class="en">Thesis on the Haskell Micro-Trainer, grade 1.3.</span></li>
+              <li><span class="de">Schwerpunkte: Datenbanksysteme, Data Mining (inkl. Process Mining). BWL-Nebenfach mit 30 ECTS.</span><span class="en">Focus: database systems, data mining (incl. process mining). Business minor, 30 ECTS.</span></li>
             </ul>
           </div>
         </article>
         <article class="entry">
-          <p class="when">2024/25</p>
+          <p class="when"><span class="de">Aug.&nbsp;2024 – Jan.&nbsp;2025</span><span class="en">Aug&nbsp;2024 – Jan&nbsp;2025</span></p>
           <div>
-            <h3><span class="de">Erasmus, Business Studies</span><span class="en">Erasmus exchange, Business Studies</span></h3>
-            <p class="where"><span class="de">Irland</span><span class="en">Ireland</span></p>
+            <h3><span class="de">Erasmus-Auslandsstudium, Business Studies</span><span class="en">Erasmus exchange, Business Studies</span></h3>
+            <p class="where"><b>Trinity College Dublin</b>, <span class="de">Irland</span><span class="en">Ireland</span></p>
           </div>
         </article>
         <article class="entry">
@@ -428,25 +542,38 @@ ul { margin: 0; padding: 0; }
       <div class="section-body">
         <dl class="skills">
           <dt><span class="de">Programmierung</span><span class="en">Programming</span></dt>
-          <dd>Python, TypeScript, SQL, Haskell</dd>
-          <dt>Web</dt>
-          <dd>React, Next.js</dd>
+          <dd><ul class="stack"><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>Java</li><li>SQL</li><li>Haskell</li></ul></dd>
+          <dt><span class="de">Web &amp; APIs</span><span class="en">Web &amp; APIs</span></dt>
+          <dd><ul class="stack"><li>React</li><li>Next.js</li><li>REST-APIs</li></ul></dd>
           <dt><span class="de">Daten</span><span class="en">Data</span></dt>
-          <dd><span class="de">PostgreSQL / Supabase, MariaDB, Data Mining (Assoziationsregeln, SVMs, Process Mining)</span><span class="en">PostgreSQL / Supabase, MariaDB, data mining (association rules, SVMs, process mining)</span></dd>
+          <dd><ul class="stack"><li>PostgreSQL</li><li>Supabase</li><li>MariaDB</li><li>Data Mining</li><li>Process Mining</li></ul></dd>
           <dt><span class="de">KI</span><span class="en">AI</span></dt>
-          <dd><span class="de">OpenAI API, Prompt Engineering, Evaluation von LLM-Ausgaben</span><span class="en">OpenAI API, prompt engineering, evaluating LLM output</span></dd>
-          <dt><span class="de">Werkzeuge</span><span class="en">Tools</span></dt>
-          <dd>Git / GitLab, Docker, LaTeX, Cursor, HubSpot</dd>
+          <dd><ul class="stack"><li>OpenAI API</li><li><span class="de">LLM-Integration</span><span class="en">LLM integration</span></li><li>Prompt Engineering</li><li>Cursor</li></ul></dd>
+          <dt><span class="de">Entwicklung</span><span class="en">Engineering</span></dt>
+          <dd><ul class="stack"><li>Git / GitLab</li><li>Docker</li><li>CI</li><li>Playwright</li><li>Cypress</li><li>Scrum</li><li>Jira</li></ul></dd>
+          <dt>Business</dt>
+          <dd><ul class="stack"><li>Excel</li><li>PowerPoint</li><li>HubSpot CRM</li></ul></dd>
           <dt><span class="de">Sprachen</span><span class="en">Languages</span></dt>
-          <dd><span class="de">Deutsch (Muttersprache), Englisch (C1/C2), Norwegisch (A1, im Kurs)</span><span class="en">German (native), English (C1/C2), Norwegian (A1, in progress)</span></dd>
+          <dd><span class="de">Deutsch (Muttersprache), Englisch (C1), Norwegisch (A1)</span><span class="en">German (native), English (C1), Norwegian (A1)</span></dd>
         </dl>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt" aria-labelledby="h-contact">
+      <h2 id="h-contact"><span class="cm" aria-hidden="true">-- main = hello</span><span class="de">Kontakt</span><span class="en">Contact</span></h2>
+      <div class="section-body contact">
+        <div class="mail-row">
+          <a class="mail" href="mailto:magnus.b.nachtigall@gmail.com">magnus.b.nachtigall@gmail.com</a>
+          <button class="btn copy" type="button" id="copy-mail"><span class="de">Kopieren</span><span class="en">Copy</span></button>
+        </div>
+        <p class="contact-note"><span class="de">Am schnellsten per E-Mail. Ich wohne in München und bin ab sofort für 15–20 Std./Woche verfügbar. Code gibt's auf </span><span class="en">Email is quickest. I live in Munich and I'm available now for 15–20 h/week. Code is on </span><a href="https://github.com/magnusnachtigall">GitHub</a>.</p>
       </div>
     </section>
 
   </main>
 
   <footer class="foot">
-    <span>magnus :: CV · <span class="de">Stand Oktober 2026</span><span class="en">Updated October 2026</span></span>
+    <span>Magnus Nachtigall, <span class="de">Stand Oktober 2026</span><span class="en">updated October 2026</span></span>
     <span>-- end of side a</span>
   </footer>
 </div>
@@ -455,24 +582,55 @@ ul { margin: 0; padding: 0; }
 (function () {
   "use strict";
   var root = document.documentElement;
+  function store(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  function read(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
 
   /* ---------- language ---------- */
+  var lang = "de";
   function setLang(l, persist) {
+    lang = l;
     root.setAttribute("data-lang", l);
     root.lang = l;
     document.getElementById("lang-de").setAttribute("aria-pressed", String(l === "de"));
     document.getElementById("lang-en").setAttribute("aria-pressed", String(l === "en"));
     var stageEl = document.getElementById("disc-stage");
     if (stageEl) stageEl.setAttribute("aria-label", l === "en" ? "Spinning CD" : "Sich drehende CD");
-    if (persist) { try { localStorage.setItem("cv-lang", l); } catch (e) {} }
+    var t = document.getElementById("theme");
+    if (t) { var lbl = l === "en" ? "Toggle light/dark" : "Hell/Dunkel wechseln"; t.setAttribute("aria-label", lbl); t.title = lbl; }
+    if (persist) store("cv-lang", l);
   }
   var initial = "de";
-  try { var saved = localStorage.getItem("cv-lang"); if (saved === "en" || saved === "de") initial = saved; } catch (e) {}
+  var saved = read("cv-lang");
+  if (saved === "en" || saved === "de") initial = saved;
   if (location.hash === "#en") initial = "en";
   if (location.hash === "#de") initial = "de";
   setLang(initial, false);
   document.querySelectorAll(".lang button").forEach(function (b) {
     b.addEventListener("click", function () { setLang(b.getAttribute("data-set"), true); });
+  });
+
+  /* ---------- theme ---------- */
+  var savedTheme = read("cv-theme");
+  if (savedTheme === "light" || savedTheme === "dark") root.setAttribute("data-theme", savedTheme);
+  function currentTheme() {
+    var t = root.getAttribute("data-theme");
+    if (t) return t;
+    try { return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } catch (e) { return "light"; }
+  }
+  document.getElementById("theme").addEventListener("click", function () {
+    var next = currentTheme() === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    store("cv-theme", next);
+  });
+
+  /* ---------- copy email ---------- */
+  var copyBtn = document.getElementById("copy-mail");
+  copyBtn.addEventListener("click", function () {
+    var done = function () {
+      copyBtn.innerHTML = lang === "en" ? "Copied" : "Kopiert";
+      setTimeout(function () { copyBtn.innerHTML = '<span class="de">Kopieren</span><span class="en">Copy</span>'; }, 1800);
+    };
+    try { navigator.clipboard.writeText("magnus.b.nachtigall@gmail.com").then(done, function () {}); } catch (e) {}
   });
 
   /* ---------- disc ---------- */
