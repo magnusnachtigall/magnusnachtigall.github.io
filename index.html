@@ -8,6 +8,8 @@
 <meta property="og:title" content="Magnus Nachtigall :: CV">
 <meta property="og:description" content="M.Sc. Informatik an der LMU München. Web-Anwendungen rund um Daten und KI.">
 <meta property="og:type" content="profile">
+<meta property="og:url" content="https://magnusnachtigall.dev/">
+<link rel="canonical" href="https://magnusnachtigall.dev/">
 <meta name="theme-color" content="#F3F4EF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0F1216" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%231B6E67'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='10'%20fill='none'%20stroke='%23F3F4EF'%20stroke-width='2.4'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='2.6'%20fill='%23F3F4EF'/%3E%3C/svg%3E">
@@ -284,9 +286,30 @@ ul { margin: 0; padding: 0; }
   .entry, .project { break-inside: avoid; }
   a { color: inherit; text-decoration: none; }
 }
+
+/* intro: full-screen particle field that assembles into words and reacts to the pointer */
+.intro { position: relative; height: 100vh; height: 100svh; min-height: 30rem; background: #0B0E12; color: #E6E8E2; overflow: hidden; }
+.intro canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: crosshair; touch-action: pan-y; }
+.intro-ui { position: absolute; inset: 0; pointer-events: none; display: flex; flex-direction: column; justify-content: space-between; padding: 1.4rem clamp(16px, 4vw, 40px) 1.8rem; }
+.intro-top { display: flex; justify-content: space-between; gap: 1rem; font-family: var(--f-mono); font-size: .9rem; letter-spacing: -.01em; }
+.intro-top b { color: #48C3B6; font-weight: 500; }
+.intro-hint { color: #97A0A9; font-size: .75rem; padding-top: .15rem; }
+.intro-down { pointer-events: auto; align-self: center; font-family: var(--f-mono); font-size: .8rem; color: #E6E8E2; text-decoration: none; border: 1px solid #272C33; border-radius: 999px; padding: .6rem 1rem; background: rgba(11,14,18,.6); backdrop-filter: blur(6px); }
+.intro-down:hover { border-color: #48C3B6; color: #48C3B6; }
+.intro-down span[aria-hidden] { display: inline-block; animation: bob 1.8s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(3px); } }
+@media (prefers-reduced-motion: reduce) { .intro-down span[aria-hidden] { animation: none; } }
+@media print { .intro { display: none; } }
 </style>
 </head>
 <body>
+<section class="intro" id="intro" aria-label="Magnus Nachtigall">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="intro-ui">
+    <p class="intro-top"><span>magnusnachtigall<b>.dev</b></span><span class="intro-hint"><span class="de">klicken &amp; bewegen</span><span class="en">click &amp; move</span></span></p>
+    <a class="intro-down" href="#top"><span class="de">Lebenslauf</span><span class="en">CV</span> <span aria-hidden="true">&darr;</span></a>
+  </div>
+</section>
 <div class="wrap">
   <header class="top">
     <a class="wordmark" href="#top" id="top">magnus nachtigall <b>:: CV</b></a>
@@ -672,6 +695,121 @@ ul { margin: 0; padding: 0; }
   stage.addEventListener("dblclick", flip);
   document.getElementById("disc-flip").addEventListener("click", flip);
   applyDisc();
+})();
+</script>
+
+
+<script>
+/* Particle field: points fly together into words, scatter away from the pointer, and morph to the next shape on click. */
+(function () {
+  "use strict";
+  var cv = document.getElementById("field");
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext("2d");
+  var reduce = false;
+  try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+  var DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var W = 0, H = 0, parts = [], shape = 0, t = 0;
+  var mouse = { x: -9999, y: -9999, down: false };
+  var COLORS = ["#48C3B6", "#48C3B6", "#79B6AE", "#E6E8E2", "#E3B505"];
+  var shapes = [
+    { lines: ["Magnus", "Nachtigall"], font: "760" },
+    { lines: ["λ"], font: "300" },
+    { lines: ["data", "-> ai"], font: "650" },
+    { lines: [":: dev"], font: "760" }
+  ];
+
+  function sample(s) {
+    var off = document.createElement("canvas");
+    off.width = W; off.height = H;
+    var o = off.getContext("2d");
+    var n = s.lines.length;
+    var size = Math.min(W / (Math.max.apply(null, s.lines.map(function (l) { return l.length; })) * 0.56), H / (n * 1.15) * (n === 1 ? 0.75 : 0.9));
+    o.fillStyle = "#fff";
+    o.textAlign = "center";
+    o.textBaseline = "middle";
+    o.font = s.font + " " + size + "px 'Bricolage Grotesque', 'Arial Narrow', sans-serif";
+    for (var i = 0; i < n; i++) o.fillText(s.lines[i], W / 2, H / 2 + (i - (n - 1) / 2) * size * 0.98);
+    var data = o.getImageData(0, 0, W, H).data, pts = [];
+    var step = Math.max(3, Math.round(Math.sqrt(W * H / 16000)));
+    for (var y = 0; y < H; y += step)
+      for (var x = 0; x < W; x += step)
+        if (data[(y * W + x) * 4 + 3] > 128) pts.push([x + (Math.random() - .5) * step * .6, y + (Math.random() - .5) * step * .6]);
+    for (var k = pts.length - 1; k > 0; k--) { var j = Math.floor(Math.random() * (k + 1)); var tmp = pts[k]; pts[k] = pts[j]; pts[j] = tmp; }
+    return pts;
+  }
+
+  function setShape(i) {
+    shape = i % shapes.length;
+    var pts = sample(shapes[shape]);
+    var need = Math.max(pts.length, 300);
+    while (parts.length < need) parts.push({ x: Math.random() * W, y: Math.random() * H, vx: 0, vy: 0, tx: 0, ty: 0, free: false, c: COLORS[Math.floor(Math.random() * COLORS.length)], r: Math.random() * .9 + .6, ph: Math.random() * 6.28 });
+    for (var p = 0; p < parts.length; p++) {
+      var q = parts[p];
+      if (p < pts.length) { q.tx = pts[p][0]; q.ty = pts[p][1]; q.free = false; }
+      else { q.free = true; q.tx = Math.random() * W; q.ty = Math.random() * H; }
+      if (!reduce) { q.vx += (Math.random() - .5) * 14; q.vy += (Math.random() - .5) * 14; }
+    }
+  }
+
+  function resize() {
+    var r = cv.getBoundingClientRect();
+    W = Math.max(1, Math.round(r.width)); H = Math.max(1, Math.round(r.height));
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    setShape(shape);
+  }
+
+  function frame() {
+    t += 0.016;
+    ctx.fillStyle = "rgba(11,14,18,0.28)";
+    ctx.fillRect(0, 0, W, H);
+    var R = Math.min(W, H) * 0.13;
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i];
+      var tx = p.tx, ty = p.ty;
+      if (p.free) { tx += Math.sin(t * .4 + p.ph) * 40; ty += Math.cos(t * .3 + p.ph) * 40; }
+      p.vx += (tx - p.x) * 0.012;
+      p.vy += (ty - p.y) * 0.012;
+      var dx = p.x - mouse.x, dy = p.y - mouse.y, d2 = dx * dx + dy * dy;
+      if (d2 < R * R) {
+        var d = Math.sqrt(d2) || 1, f = (1 - d / R) * (mouse.down ? 9 : 4.5);
+        p.vx += dx / d * f; p.vy += dy / d * f;
+      }
+      p.vx *= 0.86; p.vy *= 0.86;
+      p.x += p.vx; p.y += p.vy;
+      var sp = Math.min(1, Math.sqrt(p.vx * p.vx + p.vy * p.vy) / 6);
+      ctx.globalAlpha = p.free ? .35 : .95;
+      ctx.fillStyle = sp > .35 ? "#E3B505" : p.c;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r + sp * 1.2, 0, 6.2832);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+    if (!reduce) requestAnimationFrame(frame);
+  }
+
+  function pos(e) { var r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; }
+  cv.addEventListener("pointermove", pos);
+  cv.addEventListener("pointerdown", function (e) { pos(e); mouse.down = true; });
+  cv.addEventListener("pointerup", function () { mouse.down = false; });
+  cv.addEventListener("pointerleave", function () { mouse.x = mouse.y = -9999; mouse.down = false; });
+  cv.addEventListener("click", function () { setShape(shape + 1); if (reduce) { for (var k = 0; k < parts.length; k++) { parts[k].x = parts[k].tx; parts[k].y = parts[k].ty; } ctx.fillStyle = "#0B0E12"; ctx.fillRect(0, 0, W, H); frame(); } });
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(resize, 150); });
+
+  function start() {
+    resize();
+    if (!reduce) {
+      for (var i = 0; i < parts.length; i++) { parts[i].x = W / 2 + (Math.random() - .5) * 20; parts[i].y = H / 2 + (Math.random() - .5) * 20; }
+      requestAnimationFrame(frame);
+    } else {
+      for (var j = 0; j < parts.length; j++) { parts[j].x = parts[j].tx; parts[j].y = parts[j].ty; }
+      frame();
+    }
+  }
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load("760 40px 'Bricolage Grotesque'").then(start, start);
+  } else start();
 })();
 </script>
 
