@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Magnus Nachtigall</title>
-<meta name="description" content="Magnus Nachtigall, Fullstack-Entwickler und Informatik-Masterstudent an der LMU München.">
+<meta name="description" content="Magnus Nachtigall, Fullstack-Entwickler, Master Informatik an der LMU München.">
 <meta property="og:title" content="Magnus Nachtigall">
-<meta property="og:description" content="Fullstack-Entwickler und Informatik-Masterstudent an der LMU München.">
+<meta property="og:description" content="Fullstack-Entwickler, Master Informatik an der LMU München.">
 <meta property="og:type" content="profile">
 <meta property="og:url" content="https://magnusnachtigall.dev/">
 <link rel="canonical" href="https://magnusnachtigall.dev/">
@@ -65,9 +65,13 @@ ul { list-style: none; }
 .text p { margin-top: 1.2rem; font-size: 1.18rem; line-height: 1.5; color: var(--soft); max-width: 28rem; }
 .text p b { color: var(--gold); font-weight: 700; }
 
-.stack { margin-top: 2rem; display: grid; gap: .7rem; }
-.stack li { display: grid; grid-template-columns: 6.8rem minmax(0, 1fr); gap: 1rem; padding-top: .7rem; border-top: 1px solid var(--hair); font-size: 1.05rem; }
-.stack li span:first-child { color: var(--muted); }
+.stack { margin-top: 1.6rem; display: grid; gap: .6rem; }
+.stack li { display: grid; grid-template-columns: 7.4rem minmax(0, 1fr); gap: 1rem; padding-top: .6rem; border-top: 1px solid var(--hair); font-size: 1rem; }
+.stack li > span:first-child { color: var(--muted); padding-top: .2rem; }
+.text.wide { width: min(100%, 36rem); }
+.chips { display: flex; flex-wrap: wrap; gap: .35rem; }
+.chips i { font-style: normal; font-size: .92rem; border: 1px solid var(--hair); border-radius: 999px; padding: .2rem .65rem; background: rgba(11, 14, 18, .55); }
+.text p + .jobs { margin-top: 1.4rem; }
 
 .jobs { margin-top: 1.8rem; display: grid; gap: 1rem; }
 .jobs li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .2rem 1.2rem; padding-top: 1rem; border-top: 1px solid var(--hair); }
@@ -86,8 +90,8 @@ ul { list-style: none; }
 }
 @media (max-width: 899px) {
   .panel:not(.hero) { align-items: flex-end; padding-top: 46vh; padding-bottom: 3.5rem; }
-  .text { background: rgba(11, 14, 18, .72); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 1.4rem 1.3rem 1.5rem; border-radius: 16px; border: 1px solid var(--hair); }
-  .stack li { grid-template-columns: 5.8rem minmax(0, 1fr); }
+  .text { background: rgba(11, 14, 18, .88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); padding: 1.4rem 1.3rem 1.5rem; border-radius: 16px; border: 1px solid var(--hair); }
+  .stack li { grid-template-columns: minmax(0, 1fr); gap: .45rem; }
 }
 @media (prefers-reduced-motion: reduce) { .down svg { animation: none; } }
 </style>
@@ -109,22 +113,28 @@ ul { list-style: none; }
     <a class="down" href="#studium" aria-label="Weiter"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v11M3 8.5 8 13.5l5-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></a>
   </section>
 
-  <section class="panel" id="studium" data-shape="1,3" data-shape-en="1.3" data-pal="gold">
+  <section class="panel" id="studium" data-shape="" data-pal="mix">
     <div class="text">
-      <h2><span class="de">Master in Informatik an der LMU München.</span><span class="en">Master's in computer science at LMU Munich.</span></h2>
-      <p><span class="de">Aktueller Schnitt <b>1,3</b>. Davor der Bachelor in Informatik an der LMU, mit einem Auslandssemester am Trinity College Dublin.</span><span class="en">Current average <b>1.3</b> on the German scale, where 1.0 is the best grade. Before that, a bachelor's in computer science at LMU, with an exchange semester at Trinity College Dublin.</span></p>
+      <h2><span class="de">Master Informatik an der LMU München</span><span class="en">Master's in computer science at LMU Munich</span></h2>
+      <p><span class="de">Aktueller Schnitt <b>1,3</b></span><span class="en">Current average <b>1.3</b> (German scale, 1.0 is best)</span></p>
+      <ul class="jobs">
+        <li><b>B.Sc. <span class="de">Informatik</span><span class="en">Computer Science</span></b><span class="yr">2022 – 2026</span><span class="org"><span class="de">LMU München, Nebenfach BWL</span><span class="en">LMU Munich, minor in business</span></span></li>
+        <li><b><span class="de">Auslandssemester</span><span class="en">Exchange semester</span></b><span class="yr">2024 – 2025</span><span class="org">Trinity College Dublin</span></li>
+      </ul>
     </div>
   </section>
 
   <section class="panel" id="stack" data-shape="full|stack" data-pal="teal">
-    <div class="text">
-      <h2><span class="de">Fullstack, von der Datenbank bis zur Oberfläche.</span><span class="en">Full stack, from the database to the interface.</span></h2>
-      <p><span class="de">An der LMU entwickle ich gerade die Lernsoftware PaOLA weiter.</span><span class="en">At LMU I'm currently developing the learning software PaOLA.</span></p>
+    <div class="text wide">
+      <h2><span class="de">Fullstack-Entwicklung</span><span class="en">Full-stack development</span></h2>
       <ul class="stack">
-        <li><span>Frontend</span><span>React, Next.js, TypeScript</span></li>
-        <li><span>Backend</span><span>Java, Python, Docker</span></li>
-        <li><span><span class="de">Daten</span><span class="en">Data</span></span><span>SQL, PostgreSQL, MariaDB</span></li>
-        <li><span><span class="de">Funktional</span><span class="en">Functional</span></span><span>Haskell</span></li>
+        <li><span><span class="de">Sprachen</span><span class="en">Languages</span></span><span class="chips"><i>TypeScript</i><i>JavaScript</i><i>Python</i><i>Java</i><i>SQL</i><i>Haskell</i></span></li>
+        <li><span>Frontend</span><span class="chips"><i>React</i><i>Next.js</i><i>HTML</i><i>CSS</i><i>Responsive Design</i></span></li>
+        <li><span>Backend</span><span class="chips"><i>Node.js</i><i>REST-APIs</i><i>Supabase</i></span></li>
+        <li><span><span class="de">Datenbanken</span><span class="en">Databases</span></span><span class="chips"><i>PostgreSQL</i><i>MariaDB</i><i>MySQL</i><i><span class="de">Datenmodellierung</span><span class="en">Data modelling</span></i></span></li>
+        <li><span><span class="de">KI</span><span class="en">AI</span></span><span class="chips"><i>OpenAI API</i><i><span class="de">LLM-Integration</span><span class="en">LLM integration</span></i><i>Prompt Engineering</i><i>Machine Learning</i></span></li>
+        <li><span>DevOps</span><span class="chips"><i>Git</i><i>GitHub</i><i>GitLab CI</i><i>Docker</i><i>Playwright</i><i>Cypress</i></span></li>
+        <li><span><span class="de">Arbeitsweise</span><span class="en">Workflow</span></span><span class="chips"><i>Scrum</i><i>Agile</i><i>Jira</i></span></li>
       </ul>
     </div>
   </section>
@@ -136,6 +146,8 @@ ul { list-style: none; }
         <li><b><span class="de">Fullstack-Entwickler</span><span class="en">Full-stack developer</span></b><span class="yr"><span class="de">seit 2026</span><span class="en">since 2026</span></span><span class="org"><span class="de">LMU München, Lernsoftware PaOLA</span><span class="en">LMU Munich, PaOLA learning software</span></span></li>
         <li><b><span class="de">Werkstudent Business Development</span><span class="en">Working student, business development</span></b><span class="yr">2025</span><span class="org">wetter.com</span></li>
         <li><b><span class="de">Tutor Funktionale Programmierung</span><span class="en">Tutor, functional programming</span></b><span class="yr">2024</span><span class="org"><span class="de">LMU München</span><span class="en">LMU Munich</span></span></li>
+        <li><b>Flash Internships</b><span class="yr">2022 – 2023</span><span class="org">Avanade, Capgemini</span></li>
+        <li><b><span class="de">Teamleiter Fundraising</span><span class="en">Fundraising team lead</span></b><span class="yr">2020 – 2025</span><span class="org"><span class="de">Kober GmbH, für das Bayerische Rote Kreuz</span><span class="en">Kober GmbH, for the Bavarian Red Cross</span></span></li>
       </ul>
     </div>
   </section>
