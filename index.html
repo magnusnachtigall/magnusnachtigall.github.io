@@ -79,7 +79,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 .rows b { font-weight: 650; font-size: 1.12rem; }
 .rows .org { grid-column: 1; color: var(--soft); }
 .rows .yr { grid-column: 2; grid-row: 1; color: var(--soft); font-variant-numeric: tabular-nums; }
-.studium .print { aspect-ratio: 5 / 4; }
+.studium, .erfahrung { max-width: 980px; }
 .erfahrung .print { aspect-ratio: 4 / 5; }
 
 .banner { margin-top: 2.6rem; height: clamp(220px, 34vw, 460px); }
@@ -122,7 +122,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 </head>
 <body>
 <header class="hero">
-  <figure class="print" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/%22Triumph_of_Christian_religion%22_by_Laureti,_Vatican_Museum_(2994324341).jpg?width=2000" alt="" decoding="async" fetchpriority="high"></figure>
+  <figure class="print" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/%22Triumph_of_Christian_religion%22_by_Laureti,_Vatican_Museum_(2994324341).jpg?width=1600" alt="" decoding="async" fetchpriority="high"></figure>
   <div class="shade"></div>
   <div class="sweep"></div>
   <span class="lang" role="group" aria-label="Sprache / Language">
@@ -142,7 +142,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 
 <main>
   <section class="part" id="studium">
-    <div class="in two studium rv">
+    <div class="in studium rv">
       <div>
         <h2><span class="de">Master Informatik an der LMU München</span><span class="en">Master's in computer science at LMU Munich</span></h2>
         <p class="lead"><span class="de">Aktueller Schnitt <b>1,3</b></span><span class="en">Current average <b>1.3</b> (German scale, 1.0 is best)</span></p>
@@ -151,7 +151,6 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
           <li><b><span class="de">Auslandssemester</span><span class="en">Exchange semester</span></b><span class="yr">2024 – 2025</span><span class="org">Trinity College Dublin</span></li>
         </ul>
       </div>
-      <figure class="print"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/%22The_School_of_Athens%22_by_Raffaello_Sanzio_da_Urbino.jpg?width=1200" alt="" loading="lazy" decoding="async"></figure>
     </div>
   </section>
 
@@ -159,7 +158,6 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
     <div class="in rv">
       <h2><span class="de">Fullstack-Entwicklung</span><span class="en">Full-stack development</span></h2>
     </div>
-    <figure class="print banner rv"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg?width=2000" alt="" loading="lazy" decoding="async"></figure>
     <div class="in rv">
       <ul class="stack">
         <li><span><span class="de">Sprachen</span><span class="en">Languages</span></span><span class="chips"><i>TypeScript</i><i>JavaScript</i><i>Python</i><i>Java</i><i>SQL</i><i>Haskell</i></span></li>
@@ -174,8 +172,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
   </section>
 
   <section class="part" id="erfahrung">
-    <div class="in two erfahrung rv">
-      <figure class="print"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/D%C3%BCrer_Melancholia_I.jpg?width=1200" alt="" loading="lazy" decoding="async"></figure>
+    <div class="in erfahrung rv">
       <div>
         <h2><span class="de">Erfahrung</span><span class="en">Experience</span></h2>
         <ul class="rows">
@@ -203,7 +200,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 
 <footer class="in foot">
   <span>© 2026 Magnus Nachtigall</span>
-  <span><span class="de">Bilder gemeinfrei über Wikimedia Commons: Raffael, Bruegel, Dürer. Laureti-Fresko, Foto von Michal Osmenda,</span><span class="en">Public-domain images via Wikimedia Commons: Raphael, Bruegel, Dürer. Laureti fresco, photo by Michal Osmenda,</span> <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></span>
+  <span><span class="de">Fresko von Tommaso Laureti, Foto von Michal Osmenda über Wikimedia Commons,</span><span class="en">Fresco by Tommaso Laureti, photo by Michal Osmenda via Wikimedia Commons,</span> <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></span>
 </footer>
 
 <script>
