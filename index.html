@@ -79,7 +79,8 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 .rows b { font-weight: 650; font-size: 1.12rem; }
 .rows .org { grid-column: 1; color: var(--soft); }
 .rows .yr { grid-column: 2; grid-row: 1; color: var(--soft); font-variant-numeric: tabular-nums; }
-.studium, .erfahrung { max-width: 980px; }
+.studium .print { aspect-ratio: 4 / 5; max-width: 460px; justify-self: end; width: 100%; }
+.studium .print img { object-position: 50% 30%; }
 .erfahrung .print { aspect-ratio: 4 / 5; }
 
 .banner { margin-top: 2.6rem; height: clamp(220px, 34vw, 460px); }
@@ -100,8 +101,9 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 /* reveal on scroll */
 .rv { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s cubic-bezier(.2, .8, .2, 1); }
 .rv.on { opacity: 1; transform: none; }
-.rv .print img, .print.rv img { transform: scale(1.08); transition: transform 1.6s cubic-bezier(.2, .8, .2, 1); }
-.rv.on .print img, .print.rv.on img { transform: none; }
+/* parallax: images are taller than their frame and drift slower than the page */
+.print:not(.hero-print) img { height: 124%; margin-top: -12%; will-change: transform; }
+.hero-print { will-change: transform; }
 
 @media (max-width: 860px) {
   .two, .stack { grid-template-columns: minmax(0, 1fr); }
@@ -122,7 +124,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 </head>
 <body>
 <header class="hero">
-  <figure class="print" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/%22Triumph_of_Christian_religion%22_by_Laureti,_Vatican_Museum_(2994324341).jpg?width=1600" alt="" decoding="async" fetchpriority="high"></figure>
+  <figure class="print hero-print" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/%22Triumph_of_Christian_religion%22_by_Laureti,_Vatican_Museum_(2994324341).jpg?width=1600" alt="" decoding="async" fetchpriority="high"></figure>
   <div class="shade"></div>
   <div class="sweep"></div>
   <span class="lang" role="group" aria-label="Sprache / Language">
@@ -142,7 +144,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 
 <main>
   <section class="part" id="studium">
-    <div class="in studium rv">
+    <div class="in two studium rv">
       <div>
         <h2><span class="de">Master Informatik an der LMU München</span><span class="en">Master's in computer science at LMU Munich</span></h2>
         <p class="lead"><span class="de">Aktueller Schnitt <b>1,3</b></span><span class="en">Current average <b>1.3</b> (German scale, 1.0 is best)</span></p>
@@ -151,6 +153,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
           <li><b><span class="de">Auslandssemester</span><span class="en">Exchange semester</span></b><span class="yr">2024 – 2025</span><span class="org">Trinity College Dublin</span></li>
         </ul>
       </div>
+      <figure class="print"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg?width=1000" alt="" loading="lazy" decoding="async"></figure>
     </div>
   </section>
 
@@ -158,6 +161,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
     <div class="in rv">
       <h2><span class="de">Fullstack-Entwicklung</span><span class="en">Full-stack development</span></h2>
     </div>
+    <figure class="print banner rv"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg?width=1600" alt="" loading="lazy" decoding="async"></figure>
     <div class="in rv">
       <ul class="stack">
         <li><span><span class="de">Sprachen</span><span class="en">Languages</span></span><span class="chips"><i>TypeScript</i><i>JavaScript</i><i>Python</i><i>Java</i><i>SQL</i><i>Haskell</i></span></li>
@@ -172,7 +176,8 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
   </section>
 
   <section class="part" id="erfahrung">
-    <div class="in erfahrung rv">
+    <div class="in two erfahrung rv">
+      <figure class="print"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/D%C3%BCrer_Melancholia_I.jpg?width=1200" alt="" loading="lazy" decoding="async"></figure>
       <div>
         <h2><span class="de">Erfahrung</span><span class="en">Experience</span></h2>
         <ul class="rows">
@@ -200,7 +205,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 
 <footer class="in foot">
   <span>© 2026 Magnus Nachtigall</span>
-  <span><span class="de">Fresko von Tommaso Laureti, Foto von Michal Osmenda über Wikimedia Commons,</span><span class="en">Fresco by Tommaso Laureti, photo by Michal Osmenda via Wikimedia Commons,</span> <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></span>
+  <span><span class="de">Bilder über Wikimedia Commons: Dürer (Metropolitan Museum, CC0, und gemeinfrei), Bruegel (gemeinfrei), Fresko von Laureti, Foto von Michal Osmenda,</span><span class="en">Images via Wikimedia Commons: Dürer (Metropolitan Museum, CC0, and public domain), Bruegel (public domain), fresco by Laureti, photo by Michal Osmenda,</span> <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></span>
 </footer>
 
 <script>
@@ -225,6 +230,24 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
     entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("on"); io.unobserve(en.target); } });
   }, { threshold: 0.12 });
   els.forEach(function (e) { io.observe(e); });
+  try { if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return; } catch (e) {}
+  var hero = document.querySelector(".hero-print");
+  var pics = Array.prototype.slice.call(document.querySelectorAll(".print:not(.hero-print) img"));
+  var ticking = false;
+  function par() {
+    ticking = false;
+    var vh = window.innerHeight, y = window.scrollY;
+    if (hero && y < vh * 1.2) hero.style.transform = "translate3d(0," + (y * 0.35).toFixed(1) + "px,0)";
+    pics.forEach(function (img) {
+      var r = img.parentNode.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+      var p = (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2);
+      img.style.transform = "translate3d(0," + (p * r.height * 0.1).toFixed(1) + "px,0)";
+    });
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(par); } }, { passive: true });
+  window.addEventListener("resize", par);
+  par();
 })();
 </script>
 </body>
