@@ -102,7 +102,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 .rv { opacity: 0; transform: translateY(28px); transition: opacity .9s ease, transform .9s cubic-bezier(.2, .8, .2, 1); }
 .rv.on { opacity: 1; transform: none; }
 /* parallax: images are taller than their frame and drift slower than the page */
-.print:not(.hero-print) img { height: 124%; margin-top: -12%; will-change: transform; }
+.print:not(.hero-print) img { position: relative; top: -12%; height: 124%; will-change: transform; }
 .hero-print { will-change: transform; }
 
 @media (max-width: 860px) {
