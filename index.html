@@ -120,34 +120,33 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
   .hero .shade { background: linear-gradient(0deg, #2350D8 42%, rgba(35, 80, 216, .9) 50%, rgba(35, 80, 216, 0) 66%); }
   .hero .print img { object-position: 50% 45%; }
   :root { --u: min(1vw, .6svh); }
-  .part { padding-block: 0; }
-  .pg { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-block: calc(var(--u) * 12); }
-  .two { display: flex; flex-direction: column; gap: 0; }
-  .two > .print { order: -1; aspect-ratio: auto; height: 100vh; height: 100svh; width: auto; max-width: none; margin-inline: calc(-1 * clamp(20px, 5vw, 64px)); }
-  .studium .print img { object-position: 50% 30%; }
-  #skills .d { display: none; }
-  .sk { display: block; margin-top: 0; }
-  .sk > .pg { display: flex; }
+  .part { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; padding-block: calc(var(--u) * 14); }
+  .part > * { width: 100%; }
+  .pg { display: block; min-height: 0; padding-block: 0; }
+  .two { display: flex; flex-direction: column; gap: calc(var(--u) * 8); }
+  .two > .print { order: -1; aspect-ratio: auto; height: 30vh; height: 30svh; width: 100%; max-width: none; margin: 0; }
+  .studium .print img { object-position: 50% 25%; }
+  .erfahrung .print img { object-position: 45% 40%; }
+  .sk { display: block; margin-top: calc(var(--u) * 5); }
+  .sk > .pg { display: block; }
   .sk .stack { display: grid; }
-  #skills .m { display: block; margin-bottom: calc(var(--u) * 4); }
-  #skills .banner { height: 100vh; height: 100svh; margin-top: 0; }
-  #skills .banner img { object-position: 50% 30%; }
-  h2 { font-size: calc(var(--u) * 11.5); line-height: .96; }
-  #skills h2.m { font-size: calc(var(--u) * 10.5); }
-  .lead { margin-top: calc(var(--u) * 4); font-size: calc(var(--u) * 5.6); }
-  .rows { margin-top: calc(var(--u) * 7); }
-  .rows li { padding: calc(var(--u) * 4) 0; gap: calc(var(--u) * 1) calc(var(--u) * 4); line-height: 1.25; }
-  .rows b { font-size: calc(var(--u) * 5.3); }
-  .rows .org { font-size: calc(var(--u) * 4.5); }
-  .rows .yr { font-size: calc(var(--u) * 4.3); }
+  #skills .banner { height: 24vh; height: 24svh; margin-top: calc(var(--u) * 6); }
+  #skills .banner img { object-position: 50% 35%; }
+  h2 { font-size: calc(var(--u) * 10.5); line-height: .96; }
+  .lead { margin-top: calc(var(--u) * 3.5); font-size: calc(var(--u) * 5); }
+  .rows { margin-top: calc(var(--u) * 6); }
+  .rows li { padding: calc(var(--u) * 3.4) 0; gap: calc(var(--u) * .8) calc(var(--u) * 4); line-height: 1.25; }
+  .rows b { font-size: calc(var(--u) * 4.7); }
+  .rows .org { font-size: calc(var(--u) * 4.1); }
+  .rows .yr { font-size: calc(var(--u) * 3.9); }
   .stack, .stack.cont { margin-top: 0; }
-  .stack li { grid-template-columns: minmax(0, 1fr); gap: calc(var(--u) * 2.4); padding: calc(var(--u) * 4.1) 0; }
-  .stack li > span:first-child { font-size: calc(var(--u) * 4.4); padding-top: 0; }
-  .chips { gap: calc(var(--u) * 1.6); }
-  .chips i { font-size: calc(var(--u) * 4.6); padding: .12em .5em; }
-  .hero p { font-size: calc(var(--u) * 5.2); }
-  .mail { font-size: calc(var(--u) * 9); }
-  .kontakt p { font-size: calc(var(--u) * 5.2); }
+  .stack li { grid-template-columns: calc(var(--u) * 25) minmax(0, 1fr); gap: calc(var(--u) * 3); padding: calc(var(--u) * 3.2) 0; }
+  .stack li > span:first-child { font-size: calc(var(--u) * 4); padding-top: .2em; }
+  .chips { gap: calc(var(--u) * 1.4); }
+  .chips i { font-size: calc(var(--u) * 4); padding: .1em .45em; }
+  .hero p { font-size: calc(var(--u) * 4.8); }
+  .mail { font-size: calc(var(--u) * 8.5); }
+  .kontakt p { font-size: calc(var(--u) * 4.8); }
 }
 @media (max-width: 520px) {
 }
@@ -220,7 +219,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 
   <section class="part" id="erfahrung">
     <div class="in two erfahrung rv">
-      <figure class="print"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/D%C3%BCrer_Melancholia_I.jpg?width=1200" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="print"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/A_Scholar_in_His_Study_%28%27Faust%27%29_MET_DP814791.jpg?width=1200" alt="" loading="lazy" decoding="async"></figure>
       <div>
         <div class="pg">
         <h2><span class="de">Erfahrung</span><span class="en">Experience</span></h2>
@@ -254,7 +253,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 
 <footer class="in foot">
   <span>© 2026 Magnus Nachtigall</span>
-  <span><span class="de">Bilder über Wikimedia Commons, gemeinfrei: Holzstich aus Camille Flammarions „L’atmosphère“ (1888); Dürer, Maria auf der Mondsichel (Metropolitan Museum, CC0); Bruegel, Turmbau zu Babel; Dürer, Melencolia I.</span><span class="en">Images via Wikimedia Commons, public domain: wood engraving from Camille Flammarion’s “L’atmosphère” (1888); Dürer, Virgin on a Crescent (Metropolitan Museum, CC0); Bruegel, The Tower of Babel; Dürer, Melencolia I.</span></span>
+  <span><span class="de">Bilder über Wikimedia Commons, gemeinfrei: Holzstich aus Camille Flammarions „L’atmosphère“ (1888); Dürer, Maria auf der Mondsichel (Metropolitan Museum, CC0); Bruegel, Turmbau zu Babel; Rembrandt, Faust (Metropolitan Museum, CC0).</span><span class="en">Images via Wikimedia Commons, public domain: wood engraving from Camille Flammarion’s “L’atmosphère” (1888); Dürer, Virgin on a Crescent (Metropolitan Museum, CC0); Bruegel, The Tower of Babel; Rembrandt, Faust (Metropolitan Museum, CC0).</span></span>
 </footer>
 
 <script>
