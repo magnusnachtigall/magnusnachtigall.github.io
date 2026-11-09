@@ -105,7 +105,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 .rv.on { opacity: 1; transform: none; }
 /* parallax: images are taller than their frame and drift slower than the page */
 .print:not(.hero-print) img { position: relative; top: -25%; height: 150%; will-change: transform; }
-.two > .print, .hero .in { will-change: transform; }
+.hero .in { will-change: transform; }
 .hero-print { will-change: transform; }
 
 .m { display: none; }
@@ -301,7 +301,6 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
       var p = Math.max(-1, Math.min(1, (r.top + r.height / 2 - vh / 2) / (vh / 2 + r.height / 2)));
       var h = fig.offsetHeight;
       fig.firstElementChild.style.transform = "translate3d(0," + (p * h * 0.22).toFixed(1) + "px,0)";
-      if (inTwo) fig.style.transform = wide.matches ? "translate3d(0," + (p * 90).toFixed(1) + "px,0)" : "";
     });
   }
   window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(par); } }, { passive: true });
