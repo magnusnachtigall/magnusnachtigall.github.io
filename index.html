@@ -86,7 +86,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 .erfahrung .print { aspect-ratio: 4 / 5; }
 
 .banner { margin-top: 2.6rem; height: clamp(220px, 34vw, 460px); }
-.banner img { object-position: 50% 38%; }
+.banner img { width: 160%; max-width: none; margin-left: -25%; object-position: 50% 40%; }
 .stack { margin-top: 2.6rem; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 clamp(2rem, 6vw, 5rem); }
 .stack li { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--line); }
 .stack li > span:first-child { padding-top: .25rem; font-weight: 650; color: var(--soft); }
@@ -134,7 +134,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
   #skills .banner img { filter: grayscale(1) contrast(1.7) brightness(.95); }
   #skills .banner::before { opacity: .62; background-size: 5px 5px; }
   #skills .banner::after { opacity: .85; }
-  #skills .banner img { object-position: 50% 35%; }
+  #skills .banner img { width: 165%; margin-left: -30%; object-position: 50% 32%; }
   h2 { font-size: calc(var(--u) * 10.5); line-height: .96; }
   .lead { margin-top: calc(var(--u) * 3.5); font-size: calc(var(--u) * 5); }
   .rows { margin-top: calc(var(--u) * 6); }
