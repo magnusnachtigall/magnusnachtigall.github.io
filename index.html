@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://upload.wikimedia.org">
+<link rel="preload" as="image" href="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/960px-Flammarion.jpg" imagesrcset="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/500px-Flammarion.jpg 500w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/960px-Flammarion.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/1280px-Flammarion.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/1920px-Flammarion.jpg 1920w" imagesizes="(max-width: 860px) 300px, 75vw" fetchpriority="high">
 <title>Magnus Nachtigall</title>
 <meta name="description" content="Magnus Nachtigall, Fullstack-Entwickler, Master Informatik an der LMU München.">
 <meta property="og:title" content="Magnus Nachtigall">
@@ -46,7 +48,8 @@ ul { list-style: none; }
 /* hero */
 .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; }
 .hero .print { position: absolute; top: 0; bottom: 0; right: 0; width: 64%; }
-.hero .print img { object-position: 50% 50%; filter: grayscale(1) contrast(1.6) brightness(.82); animation: develop 3.2s cubic-bezier(.2, .7, .2, 1) both; }
+.hero .print img { object-position: 50% 50%; filter: grayscale(1) contrast(1.6) brightness(.82); opacity: 0; }
+.hero .print img.ok { opacity: 1; animation: develop 1.6s cubic-bezier(.2, .7, .2, 1) both; }
 .hero .shade { position: absolute; inset: 0; z-index: 3; background: linear-gradient(90deg, #2350D8 40%, rgba(35, 80, 216, .85) 50%, rgba(35, 80, 216, 0) 68%), linear-gradient(0deg, #2350D8 0%, rgba(35, 80, 216, .9) 14%, rgba(35, 80, 216, 0) 40%); }
 .hero .sweep { position: absolute; inset: 0; z-index: 4; pointer-events: none; background: linear-gradient(180deg, transparent 0%, rgba(200, 214, 255, .55) 48%, transparent 52%); background-size: 100% 260%; animation: sweep 1.9s .2s ease-in-out both; mix-blend-mode: screen; }
 .hero .in { position: relative; z-index: 5; width: 100%; padding-bottom: clamp(2.5rem, 7vh, 5rem); }
@@ -162,7 +165,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 </head>
 <body>
 <header class="hero">
-  <figure class="print hero-print" aria-hidden="true"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Flammarion.jpg?width=1920" alt="" decoding="async" fetchpriority="high"></figure>
+  <figure class="print hero-print" aria-hidden="true"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/960px-Flammarion.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/500px-Flammarion.jpg 500w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/960px-Flammarion.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/1280px-Flammarion.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Flammarion.jpg/1920px-Flammarion.jpg 1920w" sizes="(max-width: 860px) 300px, 75vw" alt="" fetchpriority="high" onload="this.classList.add('ok')"></figure>
   <div class="shade"></div>
   <div class="sweep"></div>
   <span class="lang" role="group" aria-label="Sprache / Language">
@@ -191,7 +194,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
           <li><b><span class="de">Auslandssemester</span><span class="en">Exchange semester</span></b><span class="yr">2024 – 2025</span><span class="org">Trinity College Dublin</span></li>
         </ul>
       </div>
-      <figure class="print"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg?width=1000" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="print"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg/960px-Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg/500px-Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg 500w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg/960px-Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg/1280px-Virgin_on_a_Crescent_with_a_Starry_Crown_MET_DP815526.jpg 1280w" sizes="(max-width: 860px) 320px, 560px" alt="" loading="lazy" decoding="async"></figure>
     </div>
   </section>
 
@@ -199,7 +202,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
     <div class="in rv d">
       <h2><span class="de">Fullstack-Entwicklung</span><span class="en">Full-stack development</span></h2>
     </div>
-    <figure class="print banner rv"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg?width=1600" alt="" loading="lazy" decoding="async"></figure>
+    <figure class="print banner rv"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg/1280px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg/960px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg/1280px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg 1280w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg/1920px-Pieter_Bruegel_the_Elder_-_The_Tower_of_Babel_(Vienna)_-_Google_Art_Project_-_edited.jpg 1920w" sizes="(max-width: 860px) 330px, 100vw" alt="" loading="lazy" decoding="async"></figure>
     <div class="in rv sk">
       <div class="pg">
       <h2 class="m"><span class="de">Fullstack-Entwicklung</span><span class="en">Full-stack development</span></h2>
@@ -222,7 +225,7 @@ h2 { font-weight: 750; font-size: clamp(2.4rem, 5.4vw, 4.4rem); line-height: .95
 
   <section class="part" id="erfahrung">
     <div class="in two erfahrung rv">
-      <figure class="print"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/A_Scholar_in_His_Study_%28%27Faust%27%29_MET_DP814791.jpg?width=1200" alt="" loading="lazy" decoding="async"></figure>
+      <figure class="print"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/A_Scholar_in_His_Study_('Faust')_MET_DP814791.jpg/960px-A_Scholar_in_His_Study_('Faust')_MET_DP814791.jpg" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/A_Scholar_in_His_Study_('Faust')_MET_DP814791.jpg/500px-A_Scholar_in_His_Study_('Faust')_MET_DP814791.jpg 500w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/A_Scholar_in_His_Study_('Faust')_MET_DP814791.jpg/960px-A_Scholar_in_His_Study_('Faust')_MET_DP814791.jpg 960w, https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/A_Scholar_in_His_Study_('Faust')_MET_DP814791.jpg/1280px-A_Scholar_in_His_Study_('Faust')_MET_DP814791.jpg 1280w" sizes="(max-width: 860px) 320px, 560px" alt="" loading="lazy" decoding="async"></figure>
       <div>
         <div class="pg">
         <h2><span class="de">Erfahrung</span><span class="en">Experience</span></h2>
